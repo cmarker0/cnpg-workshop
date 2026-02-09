@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: replace-pg-cluster # change this to a unique name for your cluster to keep thing simple just use the same name as the namespace
+  name: workshop-pg-cluster # change this to a unique name for your cluster to keep thing simple just use the same name as the namespace
 spec:
   instances: 3
   affinity:
@@ -15,14 +15,14 @@ spec:
     name: admin-user
   bootstrap:
     initdb:
-      database: replace
+      database: app # this is the default database that will be created when the cluster is initialized, you can change it to whatever you want
       owner: app
       secret:
         name: app-user
   #   Uncomment if you want to restore from backup and comment out the initdb section above
   #   recovery:
-  #     database: replace
-  #     owner: replace
+  #     database: app
+  #     owner: app
   #     secret:
   #       name: app-user
   #     source: clusterBackup
@@ -33,13 +33,13 @@ spec:
   #     plugin:
   #       name: barman-cloud.cloudnative-pg.io
   #       parameters:
-  #         barmanObjectName: replace-restore-azure-object-store
-  #         serverName: replace-pg-cluster
+  #         barmanObjectName: workshop-restore-azure-object-store
+  #         serverName: workshop-pg-cluster
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
       parameters:
-        barmanObjectName: replace-backup-azure-object-store
+        barmanObjectName: workshop-backup-azure-object-store
   imageName: ghcr.io/cloudnative-pg/postgresql:18.1-system-trixie # primary and replica pg instance image can also be configured through ImageCatalog
   resources:
     requests:

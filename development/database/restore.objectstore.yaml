@@ -1,10 +1,10 @@
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
 metadata:
-  name: replace-restore-azure-object-store
+  name: workshop-restore-azure-object-store
 spec:
   configuration:
-    destinationPath: https://replace.blob.core.windows.net/barman-pg-backup/v1
+    destinationPath: https://workshop.blob.core.windows.net/barman-pg-backup/v1
     wal:
       maxParallel: 8
   instanceSidecarConfiguration:

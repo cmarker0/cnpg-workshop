@@ -1,10 +1,10 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Pooler
 metadata:
-  name: replace-pg-pooler-ro
+  name: workshop-pg-pooler-ro
 spec:
   cluster:
-    name: replace-pg-cluster
+    name: workshop-pg-cluster
   instances: 3
   type: ro
   template:

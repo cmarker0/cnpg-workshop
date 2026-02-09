@@ -6,7 +6,7 @@ CloudNativePG workshop setup with a PostgreSQL cluster, connection pooling, auto
 
 ```mermaid
 graph TD
-    NS[Namespace<br/><b>replace-pg-cluster</b>]
+    NS[Namespace<br/><b>workshop-pg-cluster</b>]
 
     subgraph Secrets
         SEC_ADMIN[Secret<br/><b>admin-user</b><br/><i>postgres superuser</i>]
@@ -14,18 +14,18 @@ graph TD
     end
 
     subgraph Cluster
-        CL[Cluster<br/><b>replace-pg-cluster</b><br/><i>3 instances, PG 18.1</i>]
+        CL[Cluster<br/><b>workshop-pg-cluster</b><br/><i>3 instances, PG 18.1</i>]
     end
 
     subgraph Backup & Restore
-        SB[ScheduledBackup<br/><b>replace-scheduled-backup</b><br/><i>3x daily</i>]
-        BOS[ObjectStore<br/><b>replace-backup-azure-object-store</b><br/><i>Azure Blob Storage</i>]
-        ROS[ObjectStore<br/><b>replace-restore-azure-object-store</b><br/><i>Azure Blob Storage</i>]
+        SB[ScheduledBackup<br/><b>workshop-scheduled-backup</b><br/><i>3x daily</i>]
+        BOS[ObjectStore<br/><b>workshop-backup-azure-object-store</b><br/><i>Azure Blob Storage</i>]
+        ROS[ObjectStore<br/><b>workshop-restore-azure-object-store</b><br/><i>Azure Blob Storage</i>]
     end
 
     subgraph Connection Pooling
-        RW[Pooler<br/><b>replace-pg-pooler-rw</b><br/><i>3 instances, read-write</i>]
-        RO[Pooler<br/><b>replace-pg-pooler-ro</b><br/><i>3 instances, read-only</i>]
+        RW[Pooler<br/><b>workshop-pg-pooler-rw</b><br/><i>3 instances, read-write</i>]
+        RO[Pooler<br/><b>workshop-pg-pooler-ro</b><br/><i>3 instances, read-only</i>]
     end
 
     %% Namespace contains everything
