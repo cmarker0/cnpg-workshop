@@ -75,3 +75,13 @@ development/
 └── pgadmin/
     └── .gitkeep
 ```
+
+*The storage account in this workshop is using LRS redundancy option.*
+
+When setting up storage account in production for backups:
+
+use at least ZRS (Zone-Redundant Storage) to protect against zone failures. GRS (Geo-Redundant Storage) is recommended for cross-region durability.
+
+![storage account example](storage-account.png)
+
+![redundancy options](redundancy.png)
