@@ -5,3 +5,5 @@ resources:
   - deployment.yaml
   - pvc.yaml
   - service.yaml
+  - route.yaml
+  - config-system.configmap.yaml

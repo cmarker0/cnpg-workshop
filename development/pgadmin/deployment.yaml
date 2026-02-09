@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: pgadmin
-          image: dpage/pgadmin4:8.11
+          image: dpage/pgadmin4:9
           securityContext:
             runAsUser: 0
             runAsGroup: 0
@@ -24,9 +24,11 @@ spec:
               memory: 512Mi
             limits:
               memory: 1024Mi
-          envFrom:
-            - secretRef:
-                name: pgadmin-default-credentials
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: admin@intility.com
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: admin
           ports:
             - name: http
               containerPort: 80
@@ -47,8 +49,8 @@ spec:
           configMap:
             name: pgadmin-servers-config
         - name: system-config-volume
-          secret:
-            secretName: pgadmin-oauth2-config
+          configMap:
+            name: pgadmin-system-config
         - name: pgadmin-data
           persistentVolumeClaim:
             claimName: pgadmin-data-pvc
