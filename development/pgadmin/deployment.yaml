@@ -24,9 +24,11 @@ spec:
               memory: 512Mi
             limits:
               memory: 1024Mi
-          envFrom:
-            - secretRef:
-                name: pgadmin-default-credentials
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: admin@intility.com
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: admin
           ports:
             - name: http
               containerPort: 80
