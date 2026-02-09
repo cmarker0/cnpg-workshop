@@ -16,7 +16,7 @@ spec:
     metadata:
       name: "{{.path.basename}}"
     spec:
-      project: default
+      project: cnpg-workshop
       source:
         repoURL: https://github.com/cmarker0/cnpg-workshop.git
         targetRevision: HEAD
