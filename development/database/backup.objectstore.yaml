@@ -3,8 +3,15 @@ kind: ObjectStore
 metadata:
   name: workshop-backup-azure-object-store
 spec:
-  retentionPolicy: "3d"
+  retentionPolicy: "1d"
   configuration:
+    azureCredentials:
+      storageAccount:
+        name: azure-storage-account-credentials
+        key: account_name
+      storageKey:
+        name: azure-storage-account-credentials
+        key: account_key
     # Please change the destinationPath to your own Azure Blob Storage URL
     destinationPath: https://workshop.blob.core.windows.net/aaXXX-workshop-pg-backup/v1
     wal:

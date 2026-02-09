@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: workshop-pg-cluster # change this to a unique name for your cluster to keep thing simple just use the same name as the namespace
+  name: workshop-pg-cluster
 spec:
   instances: 3
   affinity:
@@ -19,7 +19,7 @@ spec:
       owner: app
       secret:
         name: app-user
-  #   Uncomment if you want to restore from backup and comment out the initdb section above
+  #   # Uncomment if you want to restore from backup and comment out the initdb section above
   #   recovery:
   #     database: app
   #     owner: app
@@ -33,13 +33,13 @@ spec:
   #     plugin:
   #       name: barman-cloud.cloudnative-pg.io
   #       parameters:
-  #         barmanObjectName: workshop-restore-azure-object-store
+  #         barmanObjectName: workshop-restore-azure-object-store # reference to the restore ObjectStore resource
   #         serverName: workshop-pg-cluster
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
       parameters:
-        barmanObjectName: workshop-backup-azure-object-store
+        barmanObjectName: workshop-backup-azure-object-store # reference to the backup ObjectStore resource
   imageName: ghcr.io/cloudnative-pg/postgresql:18.1-system-trixie # primary and replica pg instance image can also be configured through ImageCatalog
   resources:
     requests:

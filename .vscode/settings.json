@@ -2,5 +2,8 @@
 	"cSpell.words": [
 		"dpage",
 		"pgadmin"
-	]
+	],
+	"yaml.schemas": {
+		"https://www.schemastore.org/yamllint.json": "file:///Users/aa773/my-projects/cnpg-workshop/development/database/cluster.yaml"
+	}
 }
