@@ -13,7 +13,7 @@ spec:
         name: azure-storage-account-credentials
         key: account_key
     # Please change the destinationPath to your own Azure Blob Storage URL
-    destinationPath: https://workshop.blob.core.windows.net/aaXXX-workshop-pg-backup/v1
+    destinationPath: https://workshop.blob.core.windows.net/aa773-workshop-pg-backup/v1
     wal:
       compression: gzip
   instanceSidecarConfiguration:
