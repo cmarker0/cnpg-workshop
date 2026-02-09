@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: pooler
+        app: pooler-rw
         intility-logging: default
     spec:
       containers:
@@ -29,7 +29,7 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - pooler
+                      - pooler-rw
               topologyKey: "kubernetes.io/hostname"
   pgbouncer:
     poolMode: session

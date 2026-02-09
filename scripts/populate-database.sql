@@ -71,13 +71,6 @@ SELECT
 FROM generate_series(1, 10);
 
 -- Show results
-\echo 'Database setup complete!'
-\echo ''
-\echo 'Available tables:'
-\dt *
-
-\echo ''
-\echo 'Sample data counts:'
 SELECT 'Customers' as table_name, COUNT(*) as row_count FROM customers
 UNION ALL
 SELECT 'Products', COUNT(*) FROM products
