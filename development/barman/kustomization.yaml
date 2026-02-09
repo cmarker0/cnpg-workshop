@@ -1,0 +1,24 @@
+# this is a temporary workaround until https://github.com/cloudnative-pg/charts/pull/742 is merged so it works correctly with openshift
+# --enable-helm has been set on the production argocd instance (https://argo-cd.readthedocs.io/en/stable/user-guide/kustomize/#kustomizing-helm-charts)
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: plugin-barman-cloud
+    repo: https://cloudnative-pg.github.io/charts
+    version: 0.5.0
+    releaseName: barman-cloud-plugin
+    namespace: cnpg-system
+    valuesInline:
+      crds:
+        create: true
+
+patches:
+  - target:
+      kind: Deployment
+      name: barman-cloud-plugin-plugin-barman-cloud
+    patch: |-
+      - op: remove
+        path: /spec/template/spec/containers/0/securityContext/runAsUser
+      - op: remove
+        path: /spec/template/spec/containers/0/securityContext/runAsGroup
