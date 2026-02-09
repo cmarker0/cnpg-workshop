@@ -1,0 +1,57 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: replace-pg-cluster # change this to a unique name for your cluster to keep thing simple just use the same name as the namespace
+spec:
+  instances: 3
+  affinity:
+    enablePodAntiAffinity: true
+    # Ideally we would like to use a topologyKey that is more specific than kubernetes.io/hostname, for example topology.kubernetes.io/zone, for better availability
+    # but since this is a demo and we are running on minikube we use kubernetes.io/hostname to ensure that the pods do not run on the same node
+    topologyKey: kubernetes.io/hostname
+    podAntiAffinityType: required
+  enableSuperuserAccess: true
+  superuserSecret:
+    name: admin-user
+  bootstrap:
+    initdb:
+      database: replace
+      owner: app
+      secret:
+        name: app-user
+  #   Uncomment if you want to restore from backup and comment out the initdb section above
+  #   recovery:
+  #     database: replace
+  #     owner: replace
+  #     secret:
+  #       name: app-user
+  #     source: clusterBackup
+  #     recoveryTarget:
+  #       backupID: 20251009T072751 # replace with the backupID you want to restore from
+  # externalClusters:
+  #   - name: clusterBackup
+  #     plugin:
+  #       name: barman-cloud.cloudnative-pg.io
+  #       parameters:
+  #         barmanObjectName: replace-restore-azure-object-store
+  #         serverName: replace-pg-cluster
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: replace-backup-azure-object-store
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.1-system-trixie # primary and replica pg instance image can also be configured through ImageCatalog
+  resources:
+    requests:
+      memory: 100Mi # this is a demo value and should be adjusted based on the workload
+      cpu: 200m # this is a demo value and should be adjusted based on the workload
+    limits:
+      memory: 300Mi # this is a demo value and should be adjusted based on the workload
+  storage:
+    storageClass: kubevirt-csi-infra-default
+    size: 2Gi
+  walStorage:
+    storageClass: kubevirt-csi-infra-default
+    size: 2Gi
+  monitoring:
+    enablePodMonitor: false # Disabled as we have a custom PodMonitor

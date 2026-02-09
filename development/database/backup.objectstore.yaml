@@ -1,0 +1,19 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: replace-backup-azure-object-store
+spec:
+  retentionPolicy: "3d"
+  configuration:
+    destinationPath: https://replace.blob.core.windows.net/barman-pg-backup/v1
+    azureCredentials:
+      inheritFromAzureAD: true
+    wal:
+      compression: gzip
+  instanceSidecarConfiguration:
+    resources:
+      requests:
+        memory: 300Mi
+        cpu: 100m
+      limits:
+        memory: 1000Mi
