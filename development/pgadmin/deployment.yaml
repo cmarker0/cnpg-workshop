@@ -17,12 +17,6 @@ spec:
           image: dpage/pgadmin4:9
           securityContext:
             runAsNonRoot: true
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-            seccompProfile:
-              type: RuntimeDefault
           resources:
             requests:
               cpu: 100m
@@ -34,9 +28,11 @@ spec:
               value: admin@intility.com
             - name: PGADMIN_DEFAULT_PASSWORD
               value: admin
+            - name: PGADMIN_LISTEN_PORT
+              value: "5050"
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 5050
               protocol: TCP
           volumeMounts:
             - name: servers-config-volume

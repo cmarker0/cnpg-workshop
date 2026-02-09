@@ -7,3 +7,4 @@ spec:
     app: pgadmin
   ports:
     - port: 80
+      targetPort: 5050
