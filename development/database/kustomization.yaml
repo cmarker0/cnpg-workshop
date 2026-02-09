@@ -10,7 +10,6 @@ resources:
   - rw.pooler.yaml
   - backup.objectstore.yaml
   - restore.objectstore.yaml
-  - blob-storage.secret.yaml
 transformers:
   - |-
     apiVersion: builtin
