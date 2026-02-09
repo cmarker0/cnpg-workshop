@@ -8,8 +8,6 @@ resources:
   - cluster.yaml
   - ro.pooler.yaml
   - rw.pooler.yaml
-  - secret-store.yaml
-  - podmonitor.yaml
   - backup.objectstore.yaml
   - restore.objectstore.yaml
 transformers:

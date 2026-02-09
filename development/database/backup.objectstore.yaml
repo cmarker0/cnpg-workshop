@@ -6,8 +6,6 @@ spec:
   retentionPolicy: "3d"
   configuration:
     destinationPath: https://replace.blob.core.windows.net/barman-pg-backup/v1
-    azureCredentials:
-      inheritFromAzureAD: true
     wal:
       compression: gzip
   instanceSidecarConfiguration:
