@@ -12,6 +12,9 @@ spec:
       labels:
         app: pgadmin
     spec:
+      serviceAccountName: pgadmin
+      securityContext:
+        fsGroup: 5050
       containers:
         - name: pgadmin
           image: dpage/pgadmin4:9

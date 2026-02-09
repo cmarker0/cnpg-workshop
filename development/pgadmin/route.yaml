@@ -7,7 +7,7 @@ spec:
     kind: Service
     name: pgadmin
   port:
-    targetPort: 80
+    targetPort: 5050
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect

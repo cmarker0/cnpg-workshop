@@ -8,4 +8,5 @@ resources:
   - route.yaml
   - config-system.configmap.yaml
   - servers-config.configmap.yaml
+  - serviceaccount.yaml
 namespace: pgadmin
