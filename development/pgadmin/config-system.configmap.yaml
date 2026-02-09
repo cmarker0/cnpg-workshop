@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin-system-config
+data:
+  config_system.py: |
+    MASTER_PASSWORD_REQUIRED = False
+    AUTHENTICATION_SOURCES = ['internal']
