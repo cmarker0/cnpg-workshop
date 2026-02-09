@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin-servers-config
+data:
+  servers.json: |
+    {
+      "Servers": {
+        "1": {
+          "Name": "[DEV] CNPG Workshop",
+          "Group": "Servers",
+          "Port": 5432,
+          "Username": "app",
+          "SharedUsername": "app",
+          "Host": "workshop-pg-pooler-rw.workshop-pg-cluster",
+          "SSLMode": "prefer",
+          "MaintenanceDB": "postgres",
+          "BGColor": "#00ff08",
+          "FGColor": "#000000",
+          "Shared": true
+        }
+      }
+    }
