@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+        - name: pgadmin
+          image: dpage/pgadmin4:8.11
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              memory: 1024Mi
+          envFrom:
+            - secretRef:
+                name: pgadmin-default-credentials
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: servers-config-volume
+              mountPath: /pgadmin4/servers.json
+              subPath: servers.json
+              readOnly: true
+            - name: system-config-volume
+              mountPath: /etc/pgadmin/config_system.py
+              subPath: config_system.py
+              readOnly: true
+            - name: pgadmin-data
+              mountPath: /var/lib/pgadmin
+      volumes:
+        - name: servers-config-volume
+          configMap:
+            name: pgadmin-servers-config
+        - name: system-config-volume
+          secret:
+            secretName: pgadmin-oauth2-config
+        - name: pgadmin-data
+          persistentVolumeClaim:
+            claimName: pgadmin-data-pvc
