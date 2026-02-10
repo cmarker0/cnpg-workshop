@@ -53,6 +53,12 @@ Enable Helm-støtte: endre på operatoren `kustomizeBuildOptions: --enable-helm`
 ![github https](images/github_repo_https.png)
 
 - Opprett applikasjon
+  - Application Name: `appset`
+  - Project: Velg `cnpg-workshop` fra dropdown
+  - SOURCE -> Reository URL: Velg URLen til din fork fra dropdown
+  - Path: `development`
+  - Cluster: Velg clusteret ditt fra dropdown
+  - CREATE
 - Sync `database_infra` applikasjonen. Denne oppretter `namespace` og `secret` som vi trenger for å koble til Azure Blob Storage.
 
 ## OpenShift Console
