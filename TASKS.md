@@ -130,3 +130,6 @@ Det ligger flere SQL-scripts i `scripts`-mappen som du kan utforske og kjøre i 
 ![alt text](images/restore-2.png)
 ![alt text](images/restore-3.png)
   5.Commit endringene og push
+
+![alt text](image.png)
+![alt text](image-1.png)
