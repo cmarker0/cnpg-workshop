@@ -4,6 +4,13 @@ metadata:
   name: workshop-restore-azure-object-store
 spec:
   configuration:
+    azureCredentials:
+      storageAccount:
+        name: azure-storage-account-credentials
+        key: account_name
+      storageKey:
+        name: azure-storage-account-credentials
+        key: account_key
     destinationPath: https://workshop.blob.core.windows.net/barman-pg-backup/v1
     wal:
       maxParallel: 8
