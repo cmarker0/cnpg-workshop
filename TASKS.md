@@ -4,11 +4,15 @@
 
 Du har ett OpenShift cluster tilgjengelig, og har tilgang til å installere operatorer og applikasjoner i det.
 
+## Oppgaver
+
+Naviger til Developer platform: <https://developers.intility.com/clusters> og finn ditt cluster. Klikk på "Open OpenShift Console" for å åpne OpenShift dashboardet.
+
 ![OpenShift cluster example](images/open_openshift_dashboard.png)
 
-![OpenShift cluster example](images/openshift_operators_hub.png)
-
 Installer disse verktøyene/operatorene i OpenShift OperatorHub:
+
+![OpenShift cluster example](images/openshift_operators_hub.png)
 
 |Navn|Bilde|
 |----|----|
