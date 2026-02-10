@@ -11,7 +11,7 @@ spec:
       storageKey:
         name: azure-storage-account-credentials
         key: account_key
-    destinationPath: https://workshop.blob.core.windows.net/barman-pg-backup/v1
+    destinationPath: https://cnpgworkshop.blob.core.windows.net/aa773-workshop-pg-backup/v1
     wal:
       maxParallel: 8
   instanceSidecarConfiguration:
