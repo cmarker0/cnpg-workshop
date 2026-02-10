@@ -82,6 +82,6 @@ When setting up storage account in production for backups:
 
 use at least ZRS (Zone-Redundant Storage) to protect against zone failures. GRS (Geo-Redundant Storage) is recommended for cross-region durability.
 
-![storage account example](storage-account.png)
+![storage account example](images/storage-account.png)
 
-![redundancy options](redundancy.png)
+![redundancy options](images/redundancy.png)
