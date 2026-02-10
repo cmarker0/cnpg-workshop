@@ -79,11 +79,40 @@ Endre på secret `azure-storage-account-credentials` i `workshop-pg-cluster` nam
 Vi er nå klare til å spinne opp resten av infrastrukturen for CNPG workshop:
 
 1. Sync resterende applikasjoner i ArgoCD: `database`, `barman` og `pgadmin`.
+   - `database` applikasjonen oppretter en CNPG cluster med 3 noder.
+   - `barman` applikasjonen oppretter en Barman for Postgres cluster som tar backup av CNPG clusteret og lagrer det i Azure Blob Storage.
+   - `pgadmin` applikasjonen oppretter en pgAdmin instans som vi kan bruke for å koble til CNPG clusteret og utføre SQL queries.
 
 ## pgAdmin
 
-1. [Create database tables](database/create-tables.md)
-2. [Populate database tables](database/populate-tables.md)
+Finn autogenerert URL for pgAdmin applikasjonen:
+
+![argocd pgadmin app](images/argocd_pgadmin_app.png)
+
+![pgadmin external url](images/argocd_pgadmin_app_route.png)
+
+Logg på med følgende credentials:
+- Email: `admin@intility.no`
+- Password: `admin`
+
+Koble til serveren ved å skrive inn passordet `app`.
+
+![pgadmin passord-prompt](images/pgadmin_connect_password_prompt.png)
+
+Åpne Query Tool ved å klikke på ikonet i verktøylinjen:
+
+![pgadmin query tool](images/pgadmin_query_tool.png)
+
+Lim inn SQL-scriptene og kjør dem med Execute-knappen:
+
+### Database queries
+
+![pgadmin execute query](images/pgadmin_execute_query.png)
+
+1. [Create database tables](scripts/create-tables.sql)
+2. [Populate database tables with demo data](scripts/populate-database.sql)
+
+Det ligger flere SQL-scripts i `scripts`-mappen som du kan utforske og kjøre i pgAdmin.
 
 ## Backup og restore
 
