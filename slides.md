@@ -110,7 +110,7 @@ CloudNativePG er en Kubernetes-operator bygd for PostgreSQL:
 - Direkte integrasjon med Kubernetes API
 - Ingen eksterne avhengigheter
 - Deklarativ konfigurasjon
-- Self healing cluster
+- Self healing
 - Innebygd backup og restore
 - Connection pooling med PgBouncer
 
@@ -288,7 +288,7 @@ Støtter Azure, S3 og GCS.
 </div>
 
 <!--
-Backupen er fullstendig automatisert. WAL-arkivering kjører kontinuerlig, og base backups blir tatt etter definert cron schedule.
+Backupen er automatisert. WAL-arkivering kjører kontinuerlig, og base backups blir tatt etter definert cron schedule disse blir sendt til cloud storage.
 -->
 
 ---
@@ -547,7 +547,7 @@ CNPG har mange flere funksjoner. Her er et utvalg av de som kan være nyttige å
 
 <!-- _class: lead -->
 
-# Oppsummering
+# TLDR, vi får mye gratis ut av boksen
 
 | Egenskap | CNPG-løsning |
 |----------|-------------|

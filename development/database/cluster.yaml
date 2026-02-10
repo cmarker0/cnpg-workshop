@@ -14,27 +14,27 @@ spec:
   superuserSecret:
     name: admin-user
   bootstrap:
-    initdb:
-      database: app # this is the default database that will be created when the cluster is initialized, you can change it to whatever you want
+    # initdb:
+    #   database: app # this is the default database that will be created when the cluster is initialized, you can change it to whatever you want
+    #   owner: app
+    #   secret:
+    #     name: app-user
+    # Uncomment if you want to restore from backup and comment out the initdb section above
+    recovery:
+      database: app
       owner: app
       secret:
         name: app-user
-  #   # Uncomment if you want to restore from backup and comment out the initdb section above
-  #   recovery:
-  #     database: app
-  #     owner: app
-  #     secret:
-  #       name: app-user
-  #     source: clusterBackup
-  #     recoveryTarget:
-  #       backupID: 20251009T072751 # replace with the backupID you want to restore from
-  # externalClusters:
-  #   - name: clusterBackup
-  #     plugin:
-  #       name: barman-cloud.cloudnative-pg.io
-  #       parameters:
-  #         barmanObjectName: workshop-restore-azure-object-store # reference to the restore ObjectStore resource
-  #         serverName: workshop-pg-cluster
+      source: clusterBackup
+      recoveryTarget:
+        backupID: 20260210T112211 # replace with the backupID you want to restore from
+  externalClusters:
+    - name: clusterBackup
+      plugin:
+        name: barman-cloud.cloudnative-pg.io
+        parameters:
+          barmanObjectName: workshop-restore-azure-object-store # reference to the restore ObjectStore resource
+          serverName: workshop-pg-cluster
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true

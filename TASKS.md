@@ -115,5 +115,18 @@ Lim inn SQL-scriptene og kjør dem med Execute-knappen:
 Det ligger flere SQL-scripts i `scripts`-mappen som du kan utforske og kjøre i pgAdmin.
 
 ## Backup og restore
+  1. Opprett backup i openshift og vent til at backup er ferdig gjennomført
+  ![openshift api explorer](/images/openshift-backup-1.png)
+  ![openshift api explorer search](/images/openshift-backup-2.png)
+  ![create backup](/images/openshift-backup-3.png)
+  ![copy on demand backup config](/images/openshift-backup-4.png)
+  ![paste and create on demand backup](/images/openshift-backup-5.png)
+  ![see detail](/images/openshift-backup-6.png)
+  2. Kopier backup id ligger litt langt ned
+  3. Kjør SQL scriptet fra `generate-wal-load.sql` i pgadmin, merk at dette kjøres etter backupen er ferdig
+  4. Dra ned clusteret, vi skal ta en restore men cnpg støtter ikke in place recovery så alt må spinnes opp på nytt som at vi spunnet opp en init cluster. Vi kan slette clusteret via argocd guiet slik:
 
-TODO: fiks
+![kill db cluster](images/restore-1.png)
+![alt text](images/restore-2.png)
+![alt text](images/restore-3.png)
+  5.Commit endringene og push
