@@ -14,20 +14,20 @@ spec:
   superuserSecret:
     name: admin-user
   bootstrap:
-    # initdb:
-    #   database: app # this is the default database that will be created when the cluster is initialized, you can change it to whatever you want
-    #   owner: app
-    #   secret:
-    #     name: app-user
-    # Uncomment if you want to restore from backup and comment out the initdb section above
-    recovery:
-      database: app
+    initdb:
+      database: app # this is the default database that will be created when the cluster is initialized, you can change it to whatever you want
       owner: app
       secret:
         name: app-user
-      source: clusterBackup
-      recoveryTarget:
-        backupID: 20260210T112211 # replace with the backupID you want to restore from
+    # Uncomment if you want to restore from backup and comment out the initdb section above
+    # recovery:
+    #   database: app
+    #   owner: app
+    #   secret:
+    #     name: app-user
+    #   source: clusterBackup
+    #   recoveryTarget:
+    #     backupID: 20260210T112211 # replace with the backupID you want to restore from
   externalClusters:
     - name: clusterBackup
       plugin:
@@ -40,7 +40,7 @@ spec:
       isWALArchiver: true
       parameters:
         barmanObjectName: workshop-backup-azure-object-store # reference to the backup ObjectStore resource
-  imageName: ghcr.io/cloudnative-pg/postgresql:18.1-system-trixie # primary and replica pg instance image can also be configured through ImageCatalog
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.6-system-trixie # primary and replica pg instance image can also be configured through ImageCatalog
   resources:
     requests:
       memory: 100Mi # this is a demo value and should be adjusted based on the workload
