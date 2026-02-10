@@ -28,7 +28,7 @@ spec:
               memory: 1024Mi
           env:
             - name: PGADMIN_DEFAULT_EMAIL
-              value: admin
+              value: admin@intility.no
             - name: PGADMIN_DEFAULT_PASSWORD
               value: admin
             - name: PGADMIN_LISTEN_PORT
