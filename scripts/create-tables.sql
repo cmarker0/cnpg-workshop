@@ -23,7 +23,7 @@ CREATE TABLE
 CREATE TABLE
 	IF NOT EXISTS orders (
 		order_id SERIAL PRIMARY KEY,
-		customer_id INTEGER REFERENCES customers (customer_id),
+		customer_id INTEGER REFERENCES customers (customer_id) ON DELETE CASCADE,
 		order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		total_amount DECIMAL(10, 2),
 		status VARCHAR(20) DEFAULT 'pending'
@@ -33,8 +33,8 @@ CREATE TABLE
 CREATE TABLE
 	IF NOT EXISTS order_items (
 		order_item_id SERIAL PRIMARY KEY,
-		order_id INTEGER REFERENCES orders (order_id),
-		product_id INTEGER REFERENCES products (product_id),
+		order_id INTEGER REFERENCES orders (order_id) ON DELETE CASCADE,
+		product_id INTEGER REFERENCES products (product_id) ON DELETE CASCADE,
 		quantity INTEGER NOT NULL,
 		unit_price DECIMAL(10, 2) NOT NULL
 	);
