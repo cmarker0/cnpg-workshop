@@ -15,7 +15,7 @@ spec:
     # Change the destinationPath to your own Azure Blob Storage URL
     # When doing restore operation. Increment version number (e.g., v3 -> v4)
     # This needs to be an empty directory
-    destinationPath: https://cnpgworkshop.blob.core.windows.net/cnpg-workshop-pg-backup/v3
+    destinationPath: https://cnpgworkshop.blob.core.windows.net/cnpg-workshop-pg-backup/v1
     wal:
       compression: gzip
   instanceSidecarConfiguration:
