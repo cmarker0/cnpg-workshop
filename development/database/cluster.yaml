@@ -51,9 +51,9 @@ spec:
       memory: 300Mi
   storage:
     storageClass: kubevirt-csi-infra-default
-    size: 2Gi
+    size: 1Gi
   walStorage:
     storageClass: kubevirt-csi-infra-default
-    size: 2Gi
+    size: 1Gi
   monitoring:
     enablePodMonitor: false # Disabled as we have a custom PodMonitor
