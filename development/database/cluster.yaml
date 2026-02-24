@@ -29,6 +29,7 @@ spec:
       source: clusterBackup
       recoveryTarget:
         backupID: 20260224T112106 # replace with the backupID you want to restore from
+        targetTime: 2026-02-24T11:45:00+0000
   externalClusters:
     - name: clusterBackup
       plugin:

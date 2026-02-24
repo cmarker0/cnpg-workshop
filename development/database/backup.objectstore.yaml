@@ -14,7 +14,7 @@ spec:
         key: account_key
     # Please change the destinationPath to your own Azure Blob Storage URL
     # When doing restore operation, make sure to bump folder name in the destinationPath to avoid conflict. Increment version number (e.g., v3 -> v4)
-    destinationPath: https://cnpgworkshop.blob.core.windows.net/cnpg-workshop-pg-backup/v2
+    destinationPath: https://cnpgworkshop.blob.core.windows.net/cnpg-workshop-pg-backup/v3
     wal:
       compression: gzip
   instanceSidecarConfiguration:
