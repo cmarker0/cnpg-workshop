@@ -9,13 +9,14 @@ CREATE TABLE IF NOT EXISTS wal_demo_log (
     id SERIAL PRIMARY KEY,
     phase TEXT NOT NULL,
     marker TEXT,
-    recorded_at TIMESTAMP DEFAULT now()
+    recorded_at TIMESTAMP DEFAULT clock_timestamp()
 );
 
-INSERT INTO wal_demo_log (phase, marker)
-VALUES ('phase_1', 'WAL load generation started');
+INSERT INTO wal_demo_log (phase, marker, recorded_at)
+VALUES ('phase_1', 'WAL load generation started', clock_timestamp());
 
 SELECT '--- PHASE 1: Start marker recorded ---' AS status, now() AS pitr_safe_before;
+SELECT pg_sleep(2);
 
 -- ============================================================================
 -- PHASE 2: High-frequency single-row inserts (each generates its own WAL record)
@@ -33,10 +34,11 @@ BEGIN
     END LOOP;
 END $$;
 
-INSERT INTO wal_demo_log (phase, marker)
-VALUES ('phase_2', '500 single-row customer inserts completed');
+INSERT INTO wal_demo_log (phase, marker, recorded_at)
+VALUES ('phase_2', '500 single-row customer inserts completed', clock_timestamp());
 
 SELECT '--- PHASE 2: Single-row inserts done ---' AS status, now() AS pitr_safe_before;
+SELECT pg_sleep(2);
 
 -- ============================================================================
 -- PHASE 3: Bulk inserts to generate larger WAL segments
@@ -57,10 +59,11 @@ SELECT
     (ARRAY['pending','completed','shipped','cancelled'])[1 + floor(random() * 4)::int]
 FROM generate_series(1, 10000);
 
-INSERT INTO wal_demo_log (phase, marker)
-VALUES ('phase_3', 'Bulk inserts: 2000 products + 10000 orders');
+INSERT INTO wal_demo_log (phase, marker, recorded_at)
+VALUES ('phase_3', 'Bulk inserts: 2000 products + 10000 orders', clock_timestamp());
 
 SELECT '--- PHASE 3: Bulk inserts done ---' AS status, now() AS pitr_safe_before;
+SELECT pg_sleep(2);
 
 -- ============================================================================
 -- PHASE 4: Heavy UPDATE pass (updates generate more WAL than inserts due to MVCC)
@@ -83,10 +86,11 @@ WHERE product_id IN (
     SELECT product_id FROM products ORDER BY random() LIMIT 1000
 );
 
-INSERT INTO wal_demo_log (phase, marker)
-VALUES ('phase_4', 'Heavy updates: 5000 orders + 1000 products');
+INSERT INTO wal_demo_log (phase, marker, recorded_at)
+VALUES ('phase_4', 'Heavy updates: 5000 orders + 1000 products', clock_timestamp());
 
 SELECT '--- PHASE 4: Heavy updates done ---' AS status, now() AS pitr_safe_before;
+SELECT pg_sleep(2);
 
 -- ============================================================================
 -- PHASE 5: DELETE + re-INSERT churn (DELETEs are WAL-expensive)
@@ -104,10 +108,11 @@ SELECT
     (random() * 5000 + 50)::DECIMAL(10,2)
 FROM generate_series(1, 3000);
 
-INSERT INTO wal_demo_log (phase, marker)
-VALUES ('phase_5', 'Churn: deleted 2000 + inserted 3000 order_items');
+INSERT INTO wal_demo_log (phase, marker, recorded_at)
+VALUES ('phase_5', 'Churn: deleted 2000 + inserted 3000 order_items', clock_timestamp());
 
 SELECT '--- PHASE 5: Delete/insert churn done ---' AS status, now() AS pitr_safe_before;
+SELECT pg_sleep(2);
 
 -- ============================================================================
 -- PHASE 6: Large-object and TOAST-generating writes (long text forces WAL TOAST entries)
@@ -122,10 +127,11 @@ INSERT INTO wal_demo_blobs (payload)
 SELECT repeat('WAL-demo-payload-' || i || '-', 500)
 FROM generate_series(1, 200) AS s(i);
 
-INSERT INTO wal_demo_log (phase, marker)
-VALUES ('phase_6', '200 large TOAST rows inserted');
+INSERT INTO wal_demo_log (phase, marker, recorded_at)
+VALUES ('phase_6', '200 large TOAST rows inserted', clock_timestamp());
 
 SELECT '--- PHASE 6: TOAST writes done ---' AS status, now() AS pitr_safe_before;
+SELECT pg_sleep(2);
 
 -- ============================================================================
 -- PHASE 7: Rapid DDL changes (each DDL statement generates WAL)
@@ -141,8 +147,8 @@ ANALYZE products;
 ANALYZE orders;
 ANALYZE order_items;
 
-INSERT INTO wal_demo_log (phase, marker)
-VALUES ('phase_7', 'DDL: 4 indexes created + ANALYZE');
+INSERT INTO wal_demo_log (phase, marker, recorded_at)
+VALUES ('phase_7', 'DDL: 4 indexes created + ANALYZE', clock_timestamp());
 
 SELECT '--- PHASE 7: DDL operations done ---' AS status, now() AS pitr_safe_before;
 
