@@ -153,6 +153,17 @@ VALUES ('phase_7', 'DDL: 4 indexes created + ANALYZE', clock_timestamp());
 SELECT '--- PHASE 7: DDL operations done ---' AS status, now() AS pitr_safe_before;
 
 -- ============================================================================
+-- PHASE 8: Force WAL flush so all changes are archived to Azure
+-- ============================================================================
+CHECKPOINT;
+SELECT pg_switch_wal();
+
+INSERT INTO wal_demo_log (phase, marker, recorded_at)
+VALUES ('phase_8', 'WAL flushed to Azure', clock_timestamp());
+
+SELECT '--- PHASE 8: WAL flushed ---' AS status, now() AS pitr_safe_before;
+
+-- ============================================================================
 -- SUMMARY: Show all phase timestamps for PITR targeting
 -- ============================================================================
 SELECT '=== WAL DEMO LOG ===' AS info;
