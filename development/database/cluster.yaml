@@ -15,22 +15,17 @@ spec:
   superuserSecret:
     name: admin-user
   bootstrap:
-    initdb:
-      database: app # this is the default database that will be created when the cluster is initialized, you can change it to whatever you want
+    # Uncomment if you want to restore from backup and comment out the initdb section above
+    recovery:
+      database: app
       owner: app
       secret:
         name: app-user
-    # Uncomment if you want to restore from backup and comment out the initdb section above
-    # recovery:
-    #   database: app
-    #   owner: app
-    #   secret:
-    #     name: app-user
-    #   source: clusterBackup
-    #   recoveryTarget:
-    #     # backupID: 20260224T121047 # BackupID you want to restore from
-    #     targetTime: "2026-02-24T23:51:13+00:00" # Format: RFC3339, YYYY-MM-DDTHH:MM:SS+00:00
-    #     exclusive: true
+      source: clusterBackup
+      recoveryTarget:
+        backupID: 20260225T144424 # BackupID you want to restore from
+        # targetTime: "2026-02-24T23:51:13+00:00" # Format: RFC3339, YYYY-MM-DDTHH:MM:SS+00:00
+        # exclusive: true
   externalClusters:
     - name: clusterBackup
       plugin:
